@@ -1,0 +1,53 @@
+side-panel {
+  min-width: 350px;
+  border-right: 1px solid var(--divider);
+}
+@media screen and (max-width: 800px) {
+  side-panel {
+    width: 100%;
+    border: unset;
+  }
+}
+side-panel avator {
+  --size: 50px;
+  display: block;
+  border-radius: calc(var(--size) / 2);
+}
+side-panel avator img {
+  width: var(--size);
+  height: var(--size);
+  border-radius: calc(var(--size) / 2);
+}
+side-panel .user-list {
+  overflow: auto;
+  height: 100%;
+}
+side-panel .user {
+  padding: 10px 15px;
+  transition-duration: 0.1s;
+  display: flex;
+}
+side-panel .user:hover,
+side-panel .user:active {
+  background-color: var(--background-normal);
+  transition-duration: 0.1s;
+}
+side-panel .user .user-info {
+  user-select: none;
+  padding: 0px 15px;
+}
+side-panel .user .user-info group {
+  display: block;
+}
+side-panel .user .user-info group + name {
+  font-size: 0.8rem;
+  margin-bottom: unset;
+}
+side-panel .user .user-info name {
+  display: block;
+  margin-bottom: 0.1rem;
+}
+side-panel .user .user-info message {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}

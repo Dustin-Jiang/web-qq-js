@@ -5,6 +5,9 @@
   --primary-contrast-text: #ffffff;
 
   --divider: #e5e8ec;
+
+  --background-normal: #FAFAFA;
+  --background-paper: #ffffff;
   
   --text-primary: #20262d;
   --text-secondary: #46505a;
@@ -28,7 +31,7 @@
   --secondary-main: #9c27b0;
   --secondary-light: #ba68c8;
   --secondary-dark: #7b1fa2;
-  --secondary-contrastText: #ffffff;
+  --secondary-contrast-text: #ffffff;
 }
 
 .--shadow-1 {
@@ -44,52 +47,92 @@
 html, body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Arial, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', "Microsoft YaHei UI", "Microsoft YaHei", sans-serif
+  font-family: "Roboto", "Helvetica", "Arial", Oxygen, Ubuntu, Cantarell, 'Open Sans', "Microsoft YaHei UI", "Microsoft YaHei", sans-serif
 }
 
-button {
+button, input {
   border: unset;
   padding : unset;
+  &:focus {
+    outline: transparent;
+  }
 }
 
 header {
-  padding: 15px 50px;
+  user-select: none;
+  & > div {
+    padding: 10px 25px;
+    display: flex;
+    display: --webkit-flex;
+    align-items: center;
+  }
+  position: absolute;
+  width: 100%;
   background: var(--primary-main);
-  display: flex;
-  display: --webkit-flex;
-  align-items: center;
   .--shadow-2();
   header-text {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: var(--primary-contrast-text);
-    margin: 0 0.5rem;
+    margin: 0 20px;
+    font-family: "Roboto", "Helvetica", "Arial", Oxygen, Ubuntu, Cantarell, 'Open Sans', "Microsoft YaHei UI", "Microsoft YaHei", sans-serif
+  }
+  & + div.app > * {
+    padding-top: 64px;
+    display: block;
   }
   button {
-    width: 3em;
-    height: 3em;
-
     background-color: var(--primary-main);
     color: var(--primary-contrast-text);
-    border-radius: 1.5em;
-
-    transition-duration: 0.1s;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
+    width: 3.2em;
+    height: 3.2em;
+    border-radius: 1.6em;
     svg {
-      color: inherit;
       width: 25px;
       height: 25px;
-      color: var(--primary-contrast-text);
-      path {
-        fill: currentcolor;
-      }
     }
     &:hover {
       background-color: var(--primary-light);
       transition-duration: 0.1s;
     }
   }
+  //User Avator
+  & > div > div{
+    display: flex;
+    justify-content: right;
+    width: 100%;
+    button {
+      background-color: var(--primary-main);
+      color: var(--primary-contrast-text);
+      width: 3.2em;
+      height: 3.2em;
+      border-radius: 1.6em;
+      img {
+        width: 2.2rem;
+        height: 2.2rem;
+        border-radius: 1.1rem;
+      }
+    }
+  }
+}
+
+button.IconButton {
+  flex-shrink: 0;
+  transition-duration: 0.1s;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    color: inherit;
+    color: var(--primary-contrast-text);
+    path {
+      fill: currentcolor;
+    }
+  }
+}
+
+div.app {
+  height: 100vh;
+  display: flex;
 }

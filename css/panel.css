@@ -1,0 +1,94 @@
+panel {
+  background-color: var(--background-normal);
+  width: 100%;
+}
+@media screen and (max-width: 800px) {
+  panel {
+    display: none !important;
+    visibility: hidden;
+  }
+}
+.--shadow-1 {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+}
+.chat-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.chat-container .message-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 100%;
+  padding: 10px 20px;
+}
+.chat-container .message-container message {
+  display: block;
+}
+.chat-container .message-container message sender {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+}
+.chat-container .message-container message context {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 15px;
+  margin-top: 3px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+}
+.chat-container .message-container message.left context {
+  background-color: var(--primary-main);
+  color: var(--primary-contrast-text);
+  border-bottom-left-radius: 0px;
+}
+.chat-container .message-container message.right {
+  display: flex;
+  justify-content: right;
+}
+.chat-container .message-container message.right context {
+  background-color: var(--secondary-main);
+  color: var(--secondary-contrast-text);
+  border-bottom-right-radius: 0px;
+}
+.chat-container textbar {
+  background-color: var(--background-paper);
+  display: flex;
+  padding: 8px 24px;
+}
+.chat-container textbar input[type=text] {
+  height: 2.6rem;
+  caret-color: var(--secondary-main);
+  width: 100%;
+}
+.chat-container textbar button {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 1.3rem;
+  background-color: var(--background-paper);
+  color: var(--secondary-main);
+  transition-duration: 0.1s;
+}
+.chat-container textbar button svg {
+  height: 25px;
+  width: 25px;
+  margin-left: 5px;
+  color: var(--secondary-main);
+  transition-duration: 0.1s;
+}
+.chat-container textbar button:hover,
+.chat-container textbar button:active {
+  background-color: var(--secondary-main);
+  color: var(--secondary-contrast-text);
+  transition-duration: 0.1s;
+}
+.chat-container textbar button:hover svg,
+.chat-container textbar button:active svg {
+  color: var(--secondary-contrast-text);
+  transition-duration: 0.1s;
+}
+.chat-container textbar button:active {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+  transition-duration: 0.1s;
+}

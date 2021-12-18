@@ -1,0 +1,57 @@
+side-panel {
+  min-width: 350px;
+
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    border: unset;
+  }
+
+  border-right: 1px solid var(--divider);
+
+  avator {
+    --size: 50px;
+    img {
+      width: var(--size);
+      height: var(--size);
+      border-radius: calc(var(--size) / 2);
+    }
+    display: block;
+    border-radius: calc(var(--size) / 2);
+  }
+
+  .user-list {
+    overflow: auto;
+    height: 100%;
+  }
+
+  .user {
+    padding: 10px 15px;
+    transition-duration: 0.1s;
+
+    display: flex;
+
+    &:hover, &:active {
+      background-color: var(--background-normal);
+      transition-duration: 0.1s;
+    }
+    .user-info {
+      user-select: none;
+      padding: 0px 15px;
+      group {
+        display: block;
+        & + name {
+          font-size: 0.8rem;
+          margin-bottom: unset;
+        }
+      }
+      name {
+        display: block;
+        margin-bottom: 0.1rem;
+      }
+      message {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+    }
+  }
+}
