@@ -1,10 +1,14 @@
 panel {
   background-color: var(--background-normal);
   width: 100%;
+  --display: none;
+  --visibility: hidden;
+  display: var(--display);
+  visibility: var(--visibility);
 
   @media screen and (max-width: 800px){
-    display: none !important;
-    visibility: hidden;
+    --display: none;
+    --visibility: hidden;
   }
 }
 
@@ -18,13 +22,12 @@ panel {
   flex-direction: column;
 
   .message-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
+    overflow: auto;
     height: 100%;
     padding: 10px 20px;
     message {
       display: block;
+      margin-bottom: 5px;
       sender {
         display: block;
         color: var(--text-secondary);
@@ -46,7 +49,7 @@ panel {
       }
       &.right {
         display: flex;
-        justify-content: right;
+        justify-content: flex-end;
         context {
           background-color: var(--secondary-main);
           color: var(--secondary-contrast-text);
@@ -59,16 +62,21 @@ panel {
   textbar {
     background-color: var(--background-paper);
     display: flex;
-    padding: 8px 24px;
+    padding: 4px 24px;
+    border-top: 1px solid var(--divider);
     input[type=text] {
       height: 2.6rem;
+      font-size: 1.05rem;
       caret-color: var(--secondary-main);
       width: 100%;
+      background-color: var(--background-paper);
     }
     button {
       width: 2.6rem;
       height: 2.6rem;
       border-radius: 1.3rem;
+
+      margin-left: 10px;
 
       background-color: var(--background-paper);
       color: var(--secondary-main);

@@ -1,16 +1,24 @@
 side-panel {
-  min-width: 350px;
+  width: 350px;
+  flex-shrink: 0;
+  background-color: var(--background-paper);
+  color: var(--text-primary);
   border-right: 1px solid var(--divider);
 }
 @media screen and (max-width: 800px) {
   side-panel {
     width: 100%;
     border: unset;
+    display: var(--display);
+    visibility: var(--visibility);
+    min-width: unset;
   }
 }
 side-panel avator {
   --size: 50px;
-  display: block;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
   border-radius: calc(var(--size) / 2);
 }
 side-panel avator img {
@@ -23,6 +31,7 @@ side-panel .user-list {
   height: 100%;
 }
 side-panel .user {
+  user-select: none;
   padding: 10px 15px;
   transition-duration: 0.1s;
   display: flex;
@@ -33,7 +42,7 @@ side-panel .user:active {
   transition-duration: 0.1s;
 }
 side-panel .user .user-info {
-  user-select: none;
+  max-width: calc(100% - 80px);
   padding: 0px 15px;
 }
 side-panel .user .user-info group {
@@ -48,6 +57,10 @@ side-panel .user .user-info name {
   margin-bottom: 0.1rem;
 }
 side-panel .user .user-info message {
-  font-size: 0.8rem;
+  display: block;
+  font-size: 0.75rem;
   color: var(--text-secondary);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

@@ -1,9 +1,15 @@
 side-panel {
-  min-width: 350px;
+  width: 350px;
+  flex-shrink: 0;
+  background-color: var(--background-paper);
+  color: var(--text-primary);
 
   @media screen and (max-width: 800px) {
     width: 100%;
     border: unset;
+    display: var(--display);
+    visibility: var(--visibility);
+    min-width: unset;
   }
 
   border-right: 1px solid var(--divider);
@@ -15,7 +21,9 @@ side-panel {
       height: var(--size);
       border-radius: calc(var(--size) / 2);
     }
-    display: block;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
     border-radius: calc(var(--size) / 2);
   }
 
@@ -25,6 +33,7 @@ side-panel {
   }
 
   .user {
+    user-select: none;
     padding: 10px 15px;
     transition-duration: 0.1s;
 
@@ -35,7 +44,7 @@ side-panel {
       transition-duration: 0.1s;
     }
     .user-info {
-      user-select: none;
+      max-width: calc(100% - 80px);
       padding: 0px 15px;
       group {
         display: block;
@@ -49,8 +58,12 @@ side-panel {
         margin-bottom: 0.1rem;
       }
       message {
-        font-size: 0.8rem;
+        display: block;
+        font-size: 0.75rem;
         color: var(--text-secondary);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }

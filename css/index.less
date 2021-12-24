@@ -34,6 +34,44 @@
   --secondary-contrast-text: #ffffff;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-main: #90caf9;
+    --primary-light: rgb(166, 212, 250);
+    --primary-dark: rgb(100, 141, 174);
+    --primary-contrast-text: rgba(0, 0, 0, 0.87);
+
+    --secordary-main: #f48fb1;
+    --secordary-light: rgb(246, 165, 192);
+    --secordary-dark: rgb(170, 100, 123);
+    --secordary-contrast-text: rgba(0, 0, 0, 0.87);
+
+    --error-light: #e57373;
+    --error-main: #f44336;
+    --error-dark: #d32f2f;
+    --error-contrast-text: #fff;
+
+    --warning-light: #ffb74d;
+    --warning-main: #ff9800;
+    --warning-dark: #f57c00;
+    --warning-contrast-text: rgba(0, 0, 0, 0.87);
+
+    --success-light: #81c784;
+    --success-main: #4caf50;
+    --success-dark: #388e3c;
+    --success-contrast-text: rgba(0, 0, 0, 0.87);
+
+    --text-primary: #fff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-disabled: rgba(255, 255, 255, 0.5);
+
+    --background-paper: #424242;
+    --background-normal: #121212;
+
+    --divider: rgba(255, 255, 255, 0.12);
+  }
+}
+
 .--shadow-1 {
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
 }
@@ -45,12 +83,14 @@
 }
 
 html, body {
+  color: var(--text-primary);
   padding: 0;
   margin: 0;
-  font-family: "Roboto", "Helvetica", "Arial", Oxygen, Ubuntu, Cantarell, 'Open Sans', "Microsoft YaHei UI", "Microsoft YaHei", sans-serif
+  font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", Oxygen, Ubuntu, Cantarell, 'Open Sans', "Microsoft YaHei UI", "Microsoft YaHei", sans-serif
 }
 
 button, input {
+  color: var(--text-primary);
   border: unset;
   padding : unset;
   &:focus {
@@ -58,27 +98,56 @@ button, input {
   }
 }
 
+hr {
+  border-color: var(--divider);
+  margin: 5px 0px;
+  border-width: 0px 0px thin;
+}
+
 header {
   user-select: none;
   & > div {
     padding: 10px 25px;
     display: flex;
-    display: --webkit-flex;
+    display: -webkit-flex;
     align-items: center;
   }
   position: absolute;
   width: 100%;
   background: var(--primary-main);
   .--shadow-2();
+  @media screen and (max-width: 500px) {
+    & > div {
+      padding: 5px 10px;
+    
+      header-text{
+        font-size: 1.1rem;
+        margin: 0 0 0 10px;
+      }
+    }
+  }
   header-text {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+
     font-size: 1.25rem;
     color: var(--primary-contrast-text);
     margin: 0 20px;
-    font-family: "Roboto", "Helvetica", "Arial", Oxygen, Ubuntu, Cantarell, 'Open Sans', "Microsoft YaHei UI", "Microsoft YaHei", sans-serif
+    font-family: "Roboto", "Helvetica", "Arial", Oxygen, Ubuntu, Cantarell, 'Open Sans', "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+
+    img {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 1.1rem;
+      margin-right: 10px;
+    }
   }
   & + div.app > * {
     padding-top: 64px;
-    display: block;
+    @media screen and (max-width: 500px) {
+      padding-top: 55px;
+    }
   }
   button {
     background-color: var(--primary-main);
@@ -87,8 +156,8 @@ header {
     height: 3.2em;
     border-radius: 1.6em;
     svg {
-      width: 25px;
-      height: 25px;
+      width: 23px;
+      height: 23px;
     }
     &:hover {
       background-color: var(--primary-light);
@@ -98,7 +167,7 @@ header {
   //User Avator
   & > div > div{
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     width: 100%;
     button {
       background-color: var(--primary-main);
@@ -135,4 +204,67 @@ button.IconButton {
 div.app {
   height: 100vh;
   display: flex;
+  background-color: var(--background-normal);
+}
+
+flyout {
+  display: block;
+  background-color: var(--background-paper);
+
+  padding: 5px 0;
+  border-radius: 4px;
+  min-width: 100px;
+
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  z-index: 100;
+
+  transition: opacity 223ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 149ms cubic-bezier(0.4, 0, 0.2, 1) 74ms;
+  transform-origin: 175px 0px 0px;
+
+  .--shadow-3();
+
+  user {
+    display: flex;
+    padding: 6px 16px;
+    .avator img {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 1.5rem;
+    }
+    .account-info {
+      .account-name {
+        font-size: 1.2rem;
+      }
+      .account-id {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+      padding: 5px 10px;
+    }
+  }
+
+  actions {
+    button {
+      width: 100%;
+      display: block;
+      background-color: var(--background-paper);
+      text-align: left;
+      padding: 10px 16px;
+      &:hover, &:active {
+        background-color: var(--background-normal);
+      }
+    }
+  }
+
+  &.close {
+    transform: scale(0.01, 0.01);
+    opacity: 0.1;
+  }
+  &.closed {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
 }
