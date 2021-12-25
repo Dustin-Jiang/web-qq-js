@@ -6,6 +6,7 @@
   --divider: #e5e8ec;
   --background-normal: #FAFAFA;
   --background-paper: #ffffff;
+  --hover-background: rgba(0, 0, 0, 0.04);
   --text-primary: #20262d;
   --text-secondary: #46505a;
   --text-disabled: rgba(0, 0, 0, 0.38);
@@ -52,7 +53,9 @@
     --text-secondary: rgba(255, 255, 255, 0.7);
     --text-disabled: rgba(255, 255, 255, 0.5);
     --background-paper: #424242;
-    --background-normal: #121212;
+    --background-normal: #212121;
+    --background-level: #333333;
+    --hover-background: rgba(255, 255, 255, 0.08);
     --divider: rgba(255, 255, 255, 0.12);
   }
 }
@@ -77,6 +80,7 @@ input {
   color: var(--text-primary);
   border: unset;
   padding: unset;
+  font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", Oxygen, Ubuntu, Cantarell, 'Open Sans', "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
 }
 button:focus,
 input:focus {
@@ -100,6 +104,12 @@ header > div {
   display: -webkit-flex;
   align-items: center;
 }
+@media (prefers-color-scheme: dark) {
+  header {
+    background: var(--background-level);
+    color: var(--text-primary);
+  }
+}
 @media screen and (max-width: 500px) {
   header > div {
     padding: 5px 10px;
@@ -117,6 +127,11 @@ header header-text {
   color: var(--primary-contrast-text);
   margin: 0 20px;
   font-family: "Roboto", "Helvetica", "Arial", Oxygen, Ubuntu, Cantarell, 'Open Sans', "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  header header-text {
+    color: var(--text-primary);
+  }
 }
 header header-text img {
   width: 2.2rem;
@@ -139,12 +154,18 @@ header button {
   height: 3.2em;
   border-radius: 1.6em;
 }
+@media (prefers-color-scheme: dark) {
+  header button {
+    background-color: var(--background-level);
+    color: var(--text-primary);
+  }
+}
 header button svg {
   width: 23px;
   height: 23px;
 }
 header button:hover {
-  background-color: var(--primary-light);
+  background-color: var(--hover-background);
   transition-duration: 0.1s;
 }
 header > div > div {
@@ -158,6 +179,11 @@ header > div > div button {
   width: 3.2em;
   height: 3.2em;
   border-radius: 1.6em;
+}
+@media (prefers-color-scheme: dark) {
+  header > div > div button {
+    background-color: var(--background-level);
+  }
 }
 header > div > div button img {
   width: 2.2rem;
@@ -174,6 +200,11 @@ button.IconButton {
 button.IconButton svg {
   color: inherit;
   color: var(--primary-contrast-text);
+}
+@media (prefers-color-scheme: dark) {
+  button.IconButton svg {
+    color: var(--text-primary);
+  }
 }
 button.IconButton svg path {
   fill: currentcolor;

@@ -38,7 +38,7 @@ side-panel .user {
 }
 side-panel .user:hover,
 side-panel .user:active {
-  background-color: var(--background-normal);
+  background-color: var(--hover-background);
   transition-duration: 0.1s;
 }
 side-panel .user .user-info {
