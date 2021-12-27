@@ -253,10 +253,12 @@ flyout actions button {
   background-color: var(--background-paper);
   text-align: left;
   padding: 10px 16px;
+  transition-duration: 0.1s;
 }
 flyout actions button:hover,
 flyout actions button:active {
-  background-color: var(--background-normal);
+  background-color: var(--hover-background);
+  transition-duration: 0.1s;
 }
 flyout.close {
   transform: scale(0.01, 0.01);
