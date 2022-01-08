@@ -56,10 +56,7 @@ class Records {
   }
 }
 
-window.account = {
-  "id": 3599579486,
-  "name": "Dustbin"
-};
+window.account = JSON.parse(localStorage.getItem("user"));
 window.chat = [
   new Friend(2752805684, "Siunaus", new Records([
     { "sender": "self", "content": "WebQQ写嘛" },
@@ -74,6 +71,7 @@ window.chat = [
 ];
 
 $(document).ready(function () {
+  if (localStorage.getItem("user") == "" || localStorage.getItem("user") == undefined) window.location = "/login.html"
   navigateButton()
   window.addEventListener("hashchange", ()=>{
     navigateButton();
