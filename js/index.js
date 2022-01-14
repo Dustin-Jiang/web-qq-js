@@ -25,6 +25,9 @@ class Friend {
       </div>
     </div>`;
   }
+  send(message) {
+    return this.records.append(message)
+  }
 }
 class Group extends Friend {
   constructor(id, name, records) {
@@ -48,7 +51,7 @@ class Records {
     (typeof (fetcher) === "function") ? this.fetcher = fetcher : this.fetcher = undefined;
     this.timestamp = timestamp;
   }
-  show() {
+  show(element) {
     let html = "";
     for (let i of this.content) {
       let direction = (i["sender"] == "self") ? "right" : "left";
@@ -57,7 +60,8 @@ class Records {
         <context>${i.content}</context>
       </message>`;
     }
-    return html;
+    element.innerHTML = html
+    scrollToBottom(element);
   }
   latest() {
     return this.content[this.content.length - 1];
@@ -67,20 +71,27 @@ class Records {
   }
 }
 
+class TextMessage {
+  constructor(sender, content) {
+    this.sender = sender
+    this.content = content
+  }
+}
+
 window.account = {
   "id": 3599579486,
   "name": "Dustbin"
 };
 window.chat = [
   new Friend(2752805684, "Siunaus", new Records([
-    { "sender": "self", "content": "WebQQ写嘛" },
-    { "sender": "Siunaus", "content": "开始了" },
-    { "sender": "self", "content": "WebQQ写好了嘛" }
+    new TextMessage("self", "WebQQ写嘛"),
+    new TextMessage("Siunaus", "开始了"),
+    new TextMessage("self", "WebQQ写好了嘛")
   ])),
   new Group(id = 872957249, name = "Minecraft小服务器", new Records([
-    { "sender": "self", "content": "WebQQ写嘛" },
-    { "sender": "Siunaus", "content": "开始了" },
-    { "sender": "Harry", "content": "WebQQ写好了嘛" }
+    new TextMessage("self", "WebQQ写嘛"),
+    new TextMessage("Siunaus", "开始了"),
+    new TextMessage("Harry", "WebQQ写好了嘛")
   ]))
 ];
 
@@ -91,7 +102,7 @@ window.chat = [
 $(document).ready(function () {
   //Route and back
   navigateButton()
-  window.addEventListener("hashchange", ()=>{
+  window.addEventListener("hashchange", () => {
     navigateButton();
     if (location.hash.split("/")[1] === undefined) {
       hideChat();
@@ -99,21 +110,38 @@ $(document).ready(function () {
     else showChat();
   })
   $(".navigator").click(hideChat)
+
   //Display ID
   $(".account-name")[0].innerHTML = window.account.name;
   $(".account-id")[0].innerHTML = window.account.id;
+
   //Display Users
   for (i of $(".avator img")) i.src = `http://q1.qlogo.cn/g?b=qq&s=640&nk=${window.account.id}`;
   for (i in window.chat) $(".user-list")[0].innerHTML += window.chat[i].list(i);
   showChat()
+
   //Display Chat List
-  $(".user-list").delegate(".user", "click", function(event) {
+  $(".user-list").delegate(".user", "click", function (event) {
     index = event.currentTarget.dataset.index;
     location.hash = `chat/${index}`;
     showChat();
   })
+
   //Display flyout menu
   $(".IconButton.avator").click(toggleMenu);
+
+  //Handle Send Message
+  $(".SendButton").click(sendTextMsg)
+  document.addEventListener("keydown", function (event) {
+    if (event.ctrlKey) {
+      console.log("Ctrl")
+    }
+    else {
+      if (event.keyCode == 13) {
+        sendTextMsg()
+      }
+    }
+  })
 });
 
 /**
@@ -124,7 +152,7 @@ $(document).ready(function () {
 function navigateButton() {
   menu = `<svg><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>`
   back = `<svg><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></svg>`
-  $(".navigator")[0].innerHTML = (location.hash == "") ? menu : back; 
+  $(".navigator")[0].innerHTML = (location.hash == "") ? menu : back;
 }
 
 /** 
@@ -142,7 +170,7 @@ function showChat() {
     $("side-panel")[0].style.setProperty("--display", "none");
     $("side-panel")[0].style.setProperty("--visibility", "hidden");
   }
-  $(".message-container")[0].innerHTML = window.chat[index].records.show()
+  window.chat[index].records.show($(".message-container")[0])
   location.hash = `chat/${index}`
   $("header-text")[0].innerHTML = `<img src="${window.chat[index].avator}">${window.chat[index].name}`;
 }
@@ -169,7 +197,7 @@ function toggleMenu() {
   } else {
     window.removeEventListener("mousedown", closeMenuListener);
     menu.className = "close";
-    a = window.setTimeout(() => {$("flyout")[0].className = "closed"}, 233)
+    a = window.setTimeout(() => { $("flyout")[0].className = "closed" }, 233)
   }
 }
 
@@ -183,3 +211,15 @@ function closeMenuListener(event) {
     }
   }
 };
+
+function sendTextMsg() {
+  chatId = location.hash.split("/")[1]
+  window.chat[chatId].send(new TextMessage("self", $("textbar input")[0].value))
+  window.chat[index].records.show($(".message-container")[0])
+
+  $("textbar input")[0].value = ""
+}
+
+function scrollToBottom(obj) {
+  obj.scrollTop = obj.scrollHeight;
+}
