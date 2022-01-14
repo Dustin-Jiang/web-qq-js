@@ -190,23 +190,23 @@ header > div > div button img {
   height: 2.2rem;
   border-radius: 1.1rem;
 }
-button.IconButton {
+.IconButton {
   flex-shrink: 0;
   transition-duration: 0.1s;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
-button.IconButton svg {
+.IconButton svg {
   color: inherit;
   color: var(--primary-contrast-text);
 }
 @media (prefers-color-scheme: dark) {
-  button.IconButton svg {
+  .IconButton svg {
     color: var(--text-primary);
   }
 }
-button.IconButton svg path {
+.IconButton svg path {
   fill: currentcolor;
 }
 div.app {
@@ -268,4 +268,9 @@ flyout.closed {
   display: none;
   visibility: hidden;
   opacity: 0;
+}
+paper {
+  background-color: var(--background-paper);
+  border-radius: 4px;
+  display: block;
 }

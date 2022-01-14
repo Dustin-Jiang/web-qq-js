@@ -71,17 +71,7 @@ class Records {
   }
 }
 
-class TextMessage {
-  constructor(sender, content) {
-    this.sender = sender
-    this.content = content
-  }
-}
-
-window.account = {
-  "id": 3599579486,
-  "name": "Dustbin"
-};
+window.account = JSON.parse(localStorage.getItem("user"));
 window.chat = [
   new Friend(2752805684, "Siunaus", new Records([
     new TextMessage("self", "WebQQ写嘛"),
@@ -100,7 +90,7 @@ window.chat = [
  * Main Entry Point
  */
 $(document).ready(function () {
-  //Route and back
+  if (localStorage.getItem("user") == "" || localStorage.getItem("user") == undefined) window.location = "/login.html"
   navigateButton()
   window.addEventListener("hashchange", () => {
     navigateButton();
