@@ -1,110 +1,269 @@
-panel {
-  background-color: var(--background-normal);
-  width: 100%;
-  --display: none;
-  --visibility: hidden;
-  display: var(--display);
-  visibility: var(--visibility);
-
-  @media screen and (max-width: 800px){
-    --display: none;
-    --visibility: hidden;
+:root {
+  --primary-main: #007fff;
+  --primary-light: #66b2ff;
+  --primary-dark: #0059b2;
+  --primary-contrast-text: #ffffff;
+  --divider: #e5e8ec;
+  --background-normal: #FAFAFA;
+  --background-paper: #ffffff;
+  --hover-background: rgba(0, 0, 0, 0.04);
+  --text-primary: #20262d;
+  --text-secondary: #46505a;
+  --text-disabled: rgba(0, 0, 0, 0.38);
+  --error-main: #eb0014;
+  --error-light: #ff99a2;
+  --error-dark: #c70011;
+  --error-contrast-text: #ffffff;
+  --success-main: #1AA251;
+  --success-light: #6AE79C;
+  --success-dark: #1AA251;
+  --success-contrast-text: #ffffff;
+  --warning-main: #F1A204;
+  --warning-light: #FFE4A3;
+  --warning-dark: #F1A204;
+  --warning-contrast-text: rgba(0, 0, 0, 0.87);
+  --secondary-main: #9c27b0;
+  --secondary-light: #ba68c8;
+  --secondary-dark: #7b1fa2;
+  --secondary-contrast-text: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-main: #90caf9;
+    --primary-light: #a6d4fa;
+    --primary-dark: #648dae;
+    --primary-contrast-text: rgba(0, 0, 0, 0.87);
+    --secordary-main: #f48fb1;
+    --secordary-light: #f6a5c0;
+    --secordary-dark: #aa647b;
+    --secordary-contrast-text: rgba(0, 0, 0, 0.87);
+    --error-light: #e57373;
+    --error-main: #f44336;
+    --error-dark: #d32f2f;
+    --error-contrast-text: #fff;
+    --warning-light: #ffb74d;
+    --warning-main: #ff9800;
+    --warning-dark: #f57c00;
+    --warning-contrast-text: rgba(0, 0, 0, 0.87);
+    --success-light: #81c784;
+    --success-main: #4caf50;
+    --success-dark: #388e3c;
+    --success-contrast-text: rgba(0, 0, 0, 0.87);
+    --text-primary: #fff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-disabled: rgba(255, 255, 255, 0.5);
+    --background-paper: #424242;
+    --background-normal: #212121;
+    --background-level: #333333;
+    --hover-background: rgba(255, 255, 255, 0.08);
+    --divider: rgba(255, 255, 255, 0.12);
   }
 }
-
 .--shadow-1 {
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
 }
-
-.chat-container {
-  height: 100%;
+.--shadow-2 {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+}
+.--shadow-3 {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
+}
+html,
+body {
+  color: var(--text-primary);
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", Oxygen, Ubuntu, Cantarell, 'Open Sans', "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+}
+button,
+input {
+  color: var(--text-primary);
+  border: unset;
+  padding: unset;
+  font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", Oxygen, Ubuntu, Cantarell, 'Open Sans', "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+}
+button:focus,
+input:focus {
+  outline: transparent;
+}
+hr {
+  border-color: var(--divider);
+  margin: 5px 0px;
+  border-width: 0px 0px thin;
+}
+header {
+  user-select: none;
+  position: absolute;
+  width: 100%;
+  background: var(--primary-main);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+}
+header > div {
+  padding: 10px 25px;
   display: flex;
-  flex-direction: column;
-
-  .message-container {
-    overflow: auto;
-    height: 100%;
-    padding: 10px 20px;
-    message {
-      display: block;
-      margin-bottom: 5px;
-      sender {
-        display: block;
-        color: var(--text-secondary);
-        font-size: 0.7rem;
-      }
-      context {
-        display: inline-block;
-        padding: 6px 12px;
-        border-radius: 15px;
-        margin-top: 3px;
-        .--shadow-1()
-      }
-      &.left {
-        context {
-          background-color: var(--primary-main);
-          color: var(--primary-contrast-text);
-          border-bottom-left-radius: 0px;
-        }
-      }
-      &.right {
-        display: flex;
-        justify-content: flex-end;
-        context {
-          background-color: var(--secondary-main);
-          color: var(--secondary-contrast-text);
-          border-bottom-right-radius: 0px;
-        }
-      }
-    }
+  display: -webkit-flex;
+  align-items: center;
+}
+@media (prefers-color-scheme: dark) {
+  header {
+    background: var(--background-level);
+    color: var(--text-primary);
   }
-
-  textbar {
-    background-color: var(--background-paper);
-    display: flex;
-    padding: 4px 24px;
-    border-top: 1px solid var(--divider);
-    input[type=text] {
-      height: 2.6rem;
-      font-size: 1.05rem;
-      caret-color: var(--secondary-main);
-      width: 100%;
-      background-color: var(--background-paper);
-    }
-    button {
-      width: 2.6rem;
-      height: 2.6rem;
-      border-radius: 1.3rem;
-
-      margin-left: 10px;
-
-      background-color: var(--background-paper);
-      color: var(--secondary-main);
-
-      transition-duration: 0.1s;
-
-      svg {
-        height: 25px;
-        width: 25px;
-        margin-left: 5px;
-        color: var(--secondary-main);
-        transition-duration: 0.1s;
-      }
-
-      &:hover, &:active {
-        background-color: var(--secondary-main);
-        color: var(--secondary-contrast-text);
-        transition-duration: 0.1s;
-        svg {
-          color: var(--secondary-contrast-text);
-          transition-duration: 0.1s;
-        }
-      }
-
-      &:active {
-        .--shadow-1();
-        transition-duration: 0.1s;
-      }
-    }
+}
+@media screen and (max-width: 500px) {
+  header > div {
+    padding: 5px 10px;
   }
+  header > div header-text {
+    font-size: 1.1rem;
+    margin: 0 0 0 10px;
+  }
+}
+header header-text {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  color: var(--primary-contrast-text);
+  margin: 0 20px;
+  font-family: "Roboto", "Helvetica", "Arial", Oxygen, Ubuntu, Cantarell, 'Open Sans', "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  header header-text {
+    color: var(--text-primary);
+  }
+}
+header header-text img {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 1.1rem;
+  margin-right: 10px;
+}
+header + div.app > * {
+  padding-top: 64px;
+}
+@media screen and (max-width: 500px) {
+  header + div.app > * {
+    padding-top: 55px;
+  }
+}
+header button {
+  background-color: var(--primary-main);
+  color: var(--primary-contrast-text);
+  width: 3.2em;
+  height: 3.2em;
+  border-radius: 1.6em;
+}
+@media (prefers-color-scheme: dark) {
+  header button {
+    background-color: var(--background-level);
+    color: var(--text-primary);
+  }
+}
+header button svg {
+  width: 23px;
+  height: 23px;
+}
+header button:hover {
+  background-color: var(--hover-background);
+  transition-duration: 0.1s;
+}
+header > div > div {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+header > div > div button {
+  background-color: var(--primary-main);
+  color: var(--primary-contrast-text);
+  width: 3.2em;
+  height: 3.2em;
+  border-radius: 1.6em;
+}
+@media (prefers-color-scheme: dark) {
+  header > div > div button {
+    background-color: var(--background-level);
+  }
+}
+header > div > div button img {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 1.1rem;
+}
+button.IconButton {
+  flex-shrink: 0;
+  transition-duration: 0.1s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+button.IconButton svg {
+  color: inherit;
+  color: var(--primary-contrast-text);
+}
+@media (prefers-color-scheme: dark) {
+  button.IconButton svg {
+    color: var(--text-primary);
+  }
+}
+button.IconButton svg path {
+  fill: currentcolor;
+}
+div.app {
+  height: 100vh;
+  display: flex;
+  background-color: var(--background-normal);
+}
+flyout {
+  display: block;
+  background-color: var(--background-paper);
+  padding: 5px 0;
+  border-radius: 4px;
+  min-width: 100px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  z-index: 100;
+  transition: opacity 223ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 149ms cubic-bezier(0.4, 0, 0.2, 1) 74ms;
+  transform-origin: 175px 0px 0px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
+}
+flyout user {
+  display: flex;
+  padding: 6px 16px;
+}
+flyout user .avator img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+}
+flyout user .account-info {
+  padding: 5px 10px;
+}
+flyout user .account-info .account-name {
+  font-size: 1.2rem;
+}
+flyout user .account-info .account-id {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+flyout actions button {
+  width: 100%;
+  display: block;
+  background-color: var(--background-paper);
+  text-align: left;
+  padding: 10px 16px;
+}
+flyout actions button:hover,
+flyout actions button:active {
+  background-color: var(--hover-background);
+}
+flyout.close {
+  transform: scale(0.01, 0.01);
+  opacity: 0.1;
+}
+flyout.closed {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
 }

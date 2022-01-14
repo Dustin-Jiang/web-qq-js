@@ -1,10 +1,21 @@
 class Friend {
+  /**
+   * 
+   * @param {Number} id User QQ ID
+   * @param {String} name User nickname
+   * @param {Records[]} records An Array contains `Records` objects to contain chat records
+   */
   constructor(id, name, records) {
     this.name = name;
     this.id = id;
     this.avator = `http://q1.qlogo.cn/g?b=qq&s=640&nk=${id}`;
     this.records = records;
   }
+  /**
+   * 
+   * @param {Number} index HTML `data-index` to get correct chat history
+   * @returns 
+   */
   list(index) {
     return `<div class="user" data-index="${index}">
       <avator><img src="${this.avator}"></avator>
@@ -70,6 +81,10 @@ window.chat = [
   ]))
 ];
 
+
+/**
+ * Main Entry Point
+ */
 $(document).ready(function () {
   if (localStorage.getItem("user") == "" || localStorage.getItem("user") == undefined) window.location = "/login.html"
   navigateButton()
@@ -80,27 +95,40 @@ $(document).ready(function () {
     }
     else showChat();
   })
+  $(".navigator").click(hideChat)
+  //Display ID
   $(".account-name")[0].innerHTML = window.account.name;
   $(".account-id")[0].innerHTML = window.account.id;
+  //Display Users
   for (i of $(".avator img")) i.src = `http://q1.qlogo.cn/g?b=qq&s=640&nk=${window.account.id}`;
   for (i in window.chat) $(".user-list")[0].innerHTML += window.chat[i].list(i);
   showChat()
-
+  //Display Chat List
   $(".user-list").delegate(".user", "click", function(event) {
     index = event.currentTarget.dataset.index;
     location.hash = `chat/${index}`;
     showChat();
   })
-  $(".navigator").click(hideChat)
+  //Display flyout menu
   $(".IconButton.avator").click(toggleMenu);
 });
 
+/**
+ * Draw Icon in the navigate button
+ * 
+ * navigateButton(void) : void
+ */
 function navigateButton() {
   menu = `<svg><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>`
   back = `<svg><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></svg>`
   $(".navigator")[0].innerHTML = (location.hash == "") ? menu : back; 
 }
 
+/** 
+ * Show chat list
+ * 
+ * showChat(void) : void
+ */
 function showChat() {
   index = location.hash.split("/")[1]
   if (index == undefined) return;
@@ -115,6 +143,12 @@ function showChat() {
   location.hash = `chat/${index}`
   $("header-text")[0].innerHTML = `<img src="${window.chat[index].avator}">${window.chat[index].name}`;
 }
+
+/**
+ * Hide chat list
+ * 
+ * hideChat(void) : void
+ */
 function hideChat() {
   location.hash = "";
   $("panel")[0].style.setProperty("--display", "none");

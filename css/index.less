@@ -230,6 +230,7 @@ div.app {
   background-color: var(--background-normal);
 }
 
+//Flyout Menu
 flyout {
   display: block;
   background-color: var(--background-paper);
@@ -275,8 +276,10 @@ flyout {
       background-color: var(--background-paper);
       text-align: left;
       padding: 10px 16px;
+      transition-duration: 0.1s;
       &:hover, &:active {
-        background-color: var(--background-normal);
+        background-color: var(--hover-background);
+        transition-duration: 0.1s;
       }
     }
   }
