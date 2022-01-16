@@ -1,6 +1,7 @@
 window.apiUrl = "http://localhost:5000";
 
 $(document).ready(function () {
+  if (localStorage.getItem("user") != "" && localStorage.getItem("user") != undefined) window.location = "/index.html"
   router();
   $("#continue").click(login);
   window.addEventListener("keydown", function (event) {
