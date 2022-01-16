@@ -27,13 +27,14 @@ panel {
     padding: 10px 20px;
     message {
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 0.5rem;
       sender {
         display: block;
         color: var(--text-secondary);
         font-size: 0.7rem;
       }
       context {
+        max-width: 70%;
         display: inline-block;
         padding: 6px 12px;
         border-radius: 15px;
@@ -54,6 +55,10 @@ panel {
           background-color: var(--secondary-main);
           color: var(--secondary-contrast-text);
           border-bottom-right-radius: 0px;
+        }
+        sender {
+          display: none;
+          visibility: hidden;
         }
       }
     }

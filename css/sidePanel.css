@@ -47,6 +47,9 @@ side-panel .user .user-info {
 }
 side-panel .user .user-info group {
   display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 side-panel .user .user-info group + name {
   font-size: 0.8rem;
@@ -55,6 +58,9 @@ side-panel .user .user-info group + name {
 side-panel .user .user-info name {
   display: block;
   margin-bottom: 0.1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 side-panel .user .user-info message {
   display: block;

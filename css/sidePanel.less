@@ -48,6 +48,9 @@ side-panel {
       padding: 0px 15px;
       group {
         display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         & + name {
           font-size: 0.8rem;
           margin-bottom: unset;
@@ -56,6 +59,9 @@ side-panel {
       name {
         display: block;
         margin-bottom: 0.1rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
       message {
         display: block;

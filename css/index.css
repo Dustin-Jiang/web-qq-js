@@ -33,10 +33,10 @@
     --primary-light: #a6d4fa;
     --primary-dark: #648dae;
     --primary-contrast-text: rgba(0, 0, 0, 0.87);
-    --secordary-main: #f48fb1;
-    --secordary-light: #f6a5c0;
-    --secordary-dark: #aa647b;
-    --secordary-contrast-text: rgba(0, 0, 0, 0.87);
+    --secondary-main: #f48fb1;
+    --secondary-light: #f6a5c0;
+    --secondary-dark: #aa647b;
+    --secondary-contrast-text: rgba(0, 0, 0, 0.87);
     --error-light: #e57373;
     --error-main: #f44336;
     --error-dark: #d32f2f;
