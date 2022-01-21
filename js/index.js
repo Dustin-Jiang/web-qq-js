@@ -1,4 +1,5 @@
 window.account = JSON.parse(localStorage.getItem("user"));
+window.apiUrl = "http://localhost:5000";
 window.chat = new Client([
   new Friend(2752805684, "Siunaus", new Records([
     new TextMessage("self", "WebQQ写嘛"),
@@ -55,19 +56,19 @@ $(document).ready(function () {
   }
   else {
     //Initialize Friend List
-    $.ajax(`http://localhost:5000/user/${window.account.id}/list/friend`).done(function (data) {
+    $.ajax(`${window.apiUrl}/user/${window.account.id}/list/friend`).done(function (data) {
       for (i of data) {
         window.chat.push(new Friend(i[0], i[1].remark, new Records([], function (callback) {
           //Fetcher for historys
-          $.ajax(`http://localhost:5000/history/pull/${window.account.id}/friend/${i[0]}/latest`).done(callback);
+          $.ajax(`${window.apiUrl}/history/pull/${window.account.id}/friend/${i[0]}/latest`).done(callback);
         }, window.chat.length)));
       }
       //Then initialize Group List
-      $.ajax(`http://localhost:5000/user/${window.account.id}/list/group`).done(function (data) {
+      $.ajax(`${window.apiUrl}/user/${window.account.id}/list/group`).done(function (data) {
         for (i of data) {
           //Also Fetcher
           window.chat.push(new Group(i[0], i[1].group_name, new Records([], function (callback) {
-            $.ajax(`http://localhost:5000/history/pull/${window.account.id}/group/${i[0]}/latest`).done(callback);
+            $.ajax(`${window.apiUrl}/history/pull/${window.account.id}/group/${i[0]}/latest`).done(callback);
           }, window.chat.length)));
         }
         // Finish Loading, now initialize lists

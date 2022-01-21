@@ -70,6 +70,10 @@ class Friend {
     </div>`;
   }
   send(message) {
+    $.ajax(`${window.apiUrl}/send/text/${window.account.id}/${this.type}/${this.id}/${message.content}`).done(function(data) {
+      console.log(data)
+    })
+
     return this.records.append(message);
   }
 }
