@@ -149,10 +149,56 @@ class Records {
   }
 }
 
-class TextMessage {
+function parseMessage(message) {
+  result = []
+  nickname = new User(
+    (i.user_id == undefined) ? i.sender.user_id : i.user_id,
+    (i.nickname == undefined) ? i.sender.nickname : i.nickname
+  );
+  for (i of message.message) {
+    switch (message.message.type) {
+      case "text":
+        result.push(new TextMessage(nickname, i.text, message.time))
+        break;
+      case "image":
+        result.push(new ImageMessage(nickname, i.url, message.time))
+        break;
+      case "at":
+        result.push(new AtMessage(nickname, i.text, i.qq, message.time))
+        break;
+    }
+  }
+}
+
+class Message {
   constructor(sender, content, timestamp) {
     this.sender = sender;
     this.content = content;
     this.timestamp = timestamp;
+  }
+  show() {
+    return this.content
+  }
+}
+
+class TextMessage extends Message {
+  constructor(sender, content, timestamp) {
+    super();
+  }
+}
+
+class ImageMessage extends Message {
+  constructor(sender, content, timestamp) {
+    super()
+  }
+  show() {
+    return `<img src="${this.content}">`
+  }
+}
+
+class AtMessage extends Message {
+  constructor(sender, content, target, timestamp) {
+    super(sender, content, timestamp)
+    this.target = target
   }
 }
