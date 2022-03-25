@@ -1,0 +1,19 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "edge": "10",
+          "firefox": "35",
+          "chrome": "32",
+          "safari": "4"
+        },
+        "useBuiltIns": "usage",
+        "corejs": "3.6.5"
+      }
+    ],
+    "@babel/preset-typescript"
+  ],
+  "sourceMaps": true
+}
