@@ -5,6 +5,8 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
     "@types/jquery": "^3.5.14",
+    "@types/node": "^17.0.23",
+    "axios": "^0.26.1",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "core-js": "^3.21.1",
@@ -12,6 +14,6 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "scripts": {
-    "prepare": "yarn run babel --presets @babel/preset-typescript --extensions .ts ts -d js && yarn run browserify ./js/views/login.js -t babelify --outfile ./js/dist/login-bundle.js && yarn run browserify ./js/views/index.js -t babelify --outfile ./js/dist/index-bundle.js"
+    "build": "yarn run browserify ./js/views/login.js -t babelify --outfile ./js/dist/login-bundle.js && yarn run browserify ./js/views/index.js -t babelify --outfile ./js/dist/index-bundle.js"
   }
 }

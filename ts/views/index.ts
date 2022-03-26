@@ -6,6 +6,7 @@ import { hideChat, navigateButton, sendTextMsg, showChat, toggleMenu } from "./u
 
 (window as any).account = JSON.parse(localStorage.getItem("user") as string);
 (window as any).apiUrl = "http://localhost:5000";
+(window as any).chat = []
 /**
  * Main Entry Point
  */
@@ -53,8 +54,9 @@ $(document).ready(function () {
   } else {
     //Initialize Friend List
     $.ajax(
-      `${(window as any).apiUrl}/user/${(window as any).account.id}/list/friend`
+      `${(window as any).apiUrl}/user/${(window as any).account.id}/contact`
     ).done(function (data) {
+      console.log(data)
       for (let i of data) {
         (window as any).chat.push(
           new Friend(
@@ -76,37 +78,9 @@ $(document).ready(function () {
           )
         );
       }
-      //Then initialize Group List
-      $.ajax(
-        `${(window as any).apiUrl}/user/${
-          (window as any).account.id
-        }/list/group`
-      ).done(function (data) {
-        for (let i of data) {
-          //Also Fetcher
-          (window as any).chat.push(
-            new Group(
-              i[0],
-              i[1].group_name,
-              new Records(
-                [],
-                //@ts-ignore
-                function (callback) {
-                  $.ajax(
-                    `${(window as any).apiUrl}/history/pull/${
-                      (window as any).account.id
-                    }/group/${i[0]}/latest`
-                  ).done(callback);
-                },
-                (window as any).chat.length
-              )
-            )
-          );
-        }
-        // Finish Loading, now initialize lists
-        // To avoid using async and Promise, using a timer
-        setTimeout(initialize, 500);
-      });
+      // Finish Loading, now initialize lists
+      // To avoid using async and Promise, using a timer
+      setTimeout(initialize, 500);
     });
   }
 });

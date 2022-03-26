@@ -1,11 +1,15 @@
+import { api } from "../api";
 import { navigateButton } from "./utils";
 
 (window as any).apiUrl = "http://localhost:5000";
+
+let id : number
 
 $(document).ready(function () {
   if (localStorage.getItem("user") != "" && localStorage.getItem("user") != undefined) (window as any).location = "/index.html"
   router();
   $("#continue").click(login);
+  $("button#login").click(loginCheck)
   window.addEventListener("keydown", function (event) {
     if (event.keyCode == 13) login();
   });
@@ -16,8 +20,8 @@ $(document).ready(function () {
 });
 
 function login() {
-  let id = ($("input")[0] as HTMLFormElement).value;
-  if (isNaN(id) || id == "") {
+  id = parseInt(($("input")[0] as HTMLFormElement).value);
+  if (isNaN(id)) {
     $("input")[0].classList.add("error");
     return;
   }
@@ -39,6 +43,20 @@ function login() {
   }
   xhr.open("GET", `${(window as any).apiUrl}/login/request/${id}`)
   xhr.send()
+}
+
+function loginCheck() {
+  api.get(`/login/scan/${id}`).then((result) => {
+    if (result.status === 200) {
+      setCredential(id, () => window.location.assign("/"))
+    }
+  },
+  (result) => {
+    ($(".QR img")[0] as HTMLImageElement).src = `${
+      (window as any).apiUrl
+    }/login/qrcode/${id}?time=${(new Date()).getTime()}`;
+    alert("Please Rescan")
+  })
 }
 
 function router() {

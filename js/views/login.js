@@ -1,16 +1,24 @@
 "use strict";
 
+require("core-js/modules/es.parse-int.js");
+
 require("core-js/modules/es.array.concat.js");
 
+require("core-js/modules/es.date.to-string.js");
+
 require("core-js/modules/es.json.stringify.js");
+
+var _api = require("../api");
 
 var _utils = require("./utils");
 
 window.apiUrl = "http://localhost:5000";
+var id;
 $(document).ready(function () {
   if (localStorage.getItem("user") != "" && localStorage.getItem("user") != undefined) window.location = "/index.html";
   router();
   $("#continue").click(login);
+  $("button#login").click(loginCheck);
   window.addEventListener("keydown", function (event) {
     if (event.keyCode == 13) login();
   });
@@ -21,9 +29,9 @@ $(document).ready(function () {
 });
 
 function login() {
-  var id = $("input")[0].value;
+  id = parseInt($("input")[0].value);
 
-  if (isNaN(id) || id == "") {
+  if (isNaN(id)) {
     $("input")[0].classList.add("error");
     return;
   }
@@ -50,6 +58,19 @@ function login() {
 
   xhr.open("GET", "".concat(window.apiUrl, "/login/request/").concat(id));
   xhr.send();
+}
+
+function loginCheck() {
+  _api.api.get("/login/scan/".concat(id)).then(function (result) {
+    if (result.status === 200) {
+      setCredential(id, function () {
+        return window.location.assign("/");
+      });
+    }
+  }, function (result) {
+    $(".QR img")[0].src = "".concat(window.apiUrl, "/login/qrcode/").concat(id, "?time=").concat(new Date().getTime());
+    alert("Please Rescan");
+  });
 }
 
 function router() {

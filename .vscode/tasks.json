@@ -1,0 +1,23 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "build",
+			"problemMatcher": [],
+			"label": "npm: build",
+			"group": "build",
+			"detail": "yarn run browserify ./js/views/login.js -t babelify --outfile ./js/dist/login-bundle.js && yarn run browserify ./js/views/index.js -t babelify --outfile ./js/dist/index-bundle.js"
+		},
+		{
+			"type": "typescript",
+			"tsconfig": "tsconfig.json",
+			"option": "watch",
+			"problemMatcher": [
+				"$tsc-watch"
+			],
+			"group": "build",
+			"label": "tsc: 监视 - tsconfig.json"
+		}
+	]
+}
