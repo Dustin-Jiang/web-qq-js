@@ -1,4 +1,4 @@
-import { Message } from "./message";
+import { Message } from "./message/textMessage";
 import Records from "./records";
 
 export default class User {

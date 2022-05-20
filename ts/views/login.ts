@@ -1,23 +1,23 @@
 import { api } from "../api";
 import Auth from "../auth";
-import { navigateButton } from "./utils";
+import { NavigateButton } from "./components";
 
 let id: number
 
 export class Login {
+  navigateButton = new NavigateButton()
   constructor() {
     jQuery(() => {
-      if (localStorage.getItem("user") != "" && localStorage.getItem("user") != undefined) (window as any).location = "/index.html"
+      if ((new Auth).check()) {
+        (window as any).location = "/index.html"
+      }
       this.router();
       $("#continue").on("click", this.login);
       $("button#login").on("click", this.loginCheck)
       window.addEventListener("keydown", (event) => {
-        if (event.keyCode == 13) this.login();
+        if (event.key === "Enter") this.login();
       });
       window.addEventListener("hashchange", this.router);
-      $(".navigator").on("click", function () {
-        location.hash = "";
-      });
     })
   }
 
@@ -65,7 +65,7 @@ export class Login {
   }
 
   router() {
-    navigateButton();
+    this.navigateButton.switch();
     let hash = location.hash;
     if (hash == "#" || hash == "") {
       $(".scan")[0].classList.add("hidden");

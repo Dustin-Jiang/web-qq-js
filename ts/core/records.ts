@@ -1,6 +1,6 @@
 import { Friend, Group, UserSelf } from "./user";
 import User from "./user"
-import { Message, TextMessage } from "./message";
+import { Message, TextMessage } from "./message/textMessage";
 import { scrollToBottom } from "../views/utils";
 
 export default class Records {

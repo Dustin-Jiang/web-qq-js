@@ -1,4 +1,4 @@
-import { Message, TextMessage } from "./core/message";
+import { Message, TextMessage } from "./core/message/textMessage";
 import Records from "./core/records";
 import User, { Contact, Friend, Group } from "./core/user"
 

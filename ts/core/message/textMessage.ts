@@ -1,0 +1,8 @@
+import User from "../user"
+import { Message } from "."
+
+export default class TextMessage extends Message {
+  constructor(sender : User, content : string, timestamp? : string) {
+    super(sender, content, timestamp);
+  }
+}
